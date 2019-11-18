@@ -7,53 +7,68 @@
 
 import React, { Component } from 'react';
 import {Button,Text, Input} from 'react-native-elements'
-// import LinearGradient from 'react-native-linear-gradient'
+import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {View ,Image,StyleSheet, ImageBackground } from 'react-native';
+import {View ,Image,StyleSheet, ImageBackground, TextInput } from 'react-native';
+// import { Z_FIXED } from 'zlib';
 export default class App extends Component {
   render() {
     return (  
-        <View style={{flex:1,backgroundColor:'#CF1111', alignItems:'center'}}>
-          <View style={{flexDirection:'row', justifyContent:"flex-end",position:'absolute',right:0}}>
-            <Text h4 style={{color:'white'}}>Discount</Text>
-            <Text h4 style={{color:'#FCDD00'}}>Pay.</Text>
+       
+      <View style={styles.containerDefault}>
+        <View style={styles.logoPay}>
+          <Text h4 style={{color:'white'}}>Discount</Text>
+          <Text h4 style={{color:'#FCDD00'}}>Pay</Text>
+        </View>
+        <View style={styles.imageLogin}>
+          <Image  source={require('../assets/images/login.jpg')} style={{width:250,}}  resizeMode='contain'/>
           </View>
-          { <Image  source={require('../assets/images/register.jpg')} style={{width:250,height:250}} resizeMode='contain'/> }
-          <View style={{flexDirection:'column',justifyContent:"space-around", position:'absolute',bottom:0,marginBottom:250, width:300, zIndex:1}}>
-            <View>
-              <Input placeholder='nom' errorStyle={{ color: '#FCDD00' }} errorMessage='Entrez votre nom'/>
-            </View>
-            <View>
-              <Input placeholder='prenoms' errorStyle={{ color: '#FCDD00' }} errorMessage='Entrez votre prenoms'/>
-            </View>
-            <View>
-              <Input placeholder='email' errorStyle={{ color: '#FCDD00' }} errorMessage='Entrez votre email'/>
-            </View>
-            <View>
-              <Input placeholder='mot de passe' errorStyle={{ color: '#FCDD00' }} errorMessage='Entrez votre mot de passe'/>
-            </View>
-            <View>
-              <Input placeholder='confirmer mot de passe' errorStyle={{ color: '#FCDD00' }} errorMessage='Veuillez confirmer votre mot de passe'/>
-            </View>
-            
+        <View style={styles.containerForm}>
+          <View style={styles.inputBox}>
+            <TextInput style={{borderRadius:27, width:300, marginLeft:25}} placeholder='email ou nom utilisateur'/> 
           </View>
-          <View style={{flex:1,justifyContent:'flex-end'}}>
-          {/* <Image  source={require('../assets/images/bg_dpay1.png')} style={{width:380,height:500}} resizeMode='cover'/> */}
+          <View style={styles.inputBox}>
+            <TextInput style={{borderRadius:27, width:300, marginLeft:25}} placeholder='mot de passe'/> 
+          </View>
+          <View style={styles.btnLogin}>
+            <Button title='Connexionx' type='clear' ViewComponent={LinearGradient} linearGradientProps={{colors:['#fff','#CF1111']}} buttonStyle={styles.buttons}/>
           </View>
         </View>
-
+      </View>
     );
   }
 }
 var styles = StyleSheet.create({
- mainstyle:{
-   flex: 1,
-   backgroundColor: 'blue'
- },
- buttons:{
-  borderRadius:20,
-  height:45
- }
+  containerDefault:{
+    backgroundColor:'#CF1111',
+    flex:1	      
+  },
+  logoPay:{
+    flexDirection:'row',
+    justifyContent:'flex-end',
+    marginBottom:35,
+  },
+  imageLogin:{
+    alignItems: 'center',
+  },
+  inputBox:{
+    backgroundColor:'white',
+    borderRadius:27,
+    alignItems:'center',
+    marginBottom:25,
+  },
+  containerForm:{
+    alignItems:'center',
+    marginTop:35,
+  },
+  btnLogin:{
+    width:150,
+  },
+  buttons:{
+    borderRadius:27,
+    height:60,
+    borderWidth: 2,
+   }
 });
  
 
