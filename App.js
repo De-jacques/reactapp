@@ -12,6 +12,9 @@ import {View ,Image,StyleSheet} from 'react-native';
 import LoginDC from './pages.DC/Login_DC';
 import ConnexionDC from './pages.DC/Register_DC';
 import CompteDC from './pages.DC/Compte_DC';
+import EditProfilDC from './pages.DC/EditProfil_DC';
+import ResetMdpDC from './pages.DC/ResetMdp_DC';
+import ValidationMdpDC from './pages.DC/ValidationMdp_DC';
 class AppDC extends Component {
   constructor(props){
     super(props);
@@ -28,7 +31,6 @@ class AppDC extends Component {
             <Button onPress={()=>this.props.navigation.navigate('Login')} title='Connectez-Vous' ViewComponent={LinearGradient} linearGradientProps={{colors:['#fff','#CF1111']}} buttonStyle={styles.buttons}/>
             <Button onPress={()=>this.props.navigation.navigate('Connexion')}  title='Inscrivez-Vous'  ViewComponent={LinearGradient} linearGradientProps={{colors:['#fff','#CF1111']}} buttonStyle={styles.buttons}/>
           </View>
-          {/* {()=>this.props.navigation.navigate('SecondeVue')} */}
           <View style={{flex:1,justifyContent:'flex-end'}}>
           <Image  source={require('./assets/images/bg_dpay1.png')} style={{width:380,height:500}} resizeMode='cover'/>
           </View>
@@ -60,6 +62,18 @@ const AppNavigator = createStackNavigator({
     header: null,
       },
   },
+  ResetMdp: {
+    screen: ResetMdpDC,
+    navigationOptions: {
+    header: null,
+      },
+  },
+  ValidationMdp: {
+    screen: ValidationMdpDC,
+    navigationOptions: {
+    header: null,
+      },
+  },
   Connexion:{
     screen:ConnexionDC,
     navigationOptions: {
@@ -69,11 +83,17 @@ const AppNavigator = createStackNavigator({
   Compte:{
     screen:CompteDC,
      navigationOptions:({navigation})=>({
-    //   header:null,
-    headerTransparent:true, 
-    headerLeft:(<View><Icon onPress={()=>navigation.toggleDrawer()} name='menu' color='white' size={45}/></View>)
+     headerTransparent:true, 
+     headerLeft:(<View><Icon onPress={()=>navigation.toggleDrawer()} name='menu' color='white' size={45}/></View>)
      }),
-  }
+  },
+  EditProfil:{
+    screen:EditProfilDC,
+      navigationsOptions:({navigation})=>({
+      headerTransparent:true,
+      // headerLeft:(<View><Icon onPress={()=>navigation.toggleDrawer()} name='menu' color='white' size={45}/></View>)
+    }),
+  },
 });
 export default createAppContainer(AppNavigator);
 

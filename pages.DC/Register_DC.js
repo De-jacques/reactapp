@@ -15,6 +15,7 @@ export default class App extends Component {
       country:''
     }
   }
+
   render() {
     return (  
       <ScrollView style={styles.containerDefault}>
@@ -28,19 +29,19 @@ export default class App extends Component {
           </View>
         <View style={styles.containerForm}>
           <View style={styles.inputBox}>
-            <TextInput style={{borderRadius:27, width:300, marginLeft:25}} placeholder='nom'/> 
+            <TextInput id="nom"  style={{borderRadius:27, width:300, marginLeft:25}} placeholder='nom'/> 
           </View>
           <View style={styles.inputBox}>
-            <TextInput style={{borderRadius:27, width:300, marginLeft:25}} placeholder='prenoms'/> 
+            <TextInput id="prenoms"  style={{borderRadius:27, width:300, marginLeft:25}} placeholder='prenoms'/> 
           </View>
           <View style={styles.inputBox}>
-            <TextInput style={{borderRadius:27, width:300, marginLeft:25}} placeholder='email'/> 
+            <TextInput id="email"  style={{borderRadius:27, width:300, marginLeft:25}} placeholder='email'/> 
           </View>
           <View style={styles.inputBox}>
-            <TextInput type='password' secureTextEntry={true} style={{borderRadius:27, width:300, marginLeft:25}} placeholder='mot de passe'/> 
+            <TextInput id="password" type='password' secureTextEntry={true} style={{borderRadius:27, width:300, marginLeft:25}} placeholder='mot de passe'/> 
           </View>
           <View style={styles.inputBox}>
-            <TextInput type='password' secureTextEntry={true} style={{borderRadius:27, width:300, marginLeft:25}} placeholder='confirmer mot de passe'/> 
+            <TextInput id="cf_password"  type='password' secureTextEntry={true} style={{borderRadius:27, width:300, marginLeft:25}} placeholder='confirmer mot de passe'/> 
           </View>
           <View style={[styles.pickerStyle,styles.inputBox]}>
           <Picker style={{borderRadius:27, width:300, marginLeft:25}} 
@@ -58,7 +59,7 @@ export default class App extends Component {
           </Picker>
           </View>
           <View style={styles.btnLogin}>
-            <Button onPress={()=>this.props.navigation.replace('Compte')}   title='Inscription'  ViewComponent={LinearGradient} linearGradientProps={{colors:['#fff','#CF1111']}} buttonStyle={styles.buttons}/>
+            <Button onPress={()=>this.props.navigation.replace('Compte')} id="resgister"   title='Inscription'  ViewComponent={LinearGradient} linearGradientProps={{colors:['#fff','#CF1111']}} buttonStyle={styles.buttons}/>
           </View>
         </View>
       </View>
