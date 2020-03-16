@@ -18,10 +18,7 @@ class depotItem extends React.Component{
 }
 
 const styleDepot = StyleSheet.create({
-    main_container:{
-        backgroundColor:'white',
-        height:75
-    }
+    
 })
 
 export default depotItem

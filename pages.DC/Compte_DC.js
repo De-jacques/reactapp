@@ -6,13 +6,16 @@
 import React, { Component} from 'react';
 import {Button,Text, Input,Avatar, Icon,ListItem,Divider} from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
-import {View ,Image,StyleSheet,FlatList, ImageBackground, TextInput,ScrollView,SafeAreaView, TouchableOpacity} from 'react-native';
+import {View ,Image,StyleSheet,FlatList, ImageBackground,Platform, TextInput,ScrollView,SafeAreaView, TouchableOpacity} from 'react-native';
 import { DrawerItems } from 'react-navigation-drawer';
 import {createAppContainer} from 'react-navigation'
 import {createDrawerNavigator} from 'react-navigation-drawer';
 import {createStackNavigator} from 'react-navigation-stack';
-import Depot from './helpers/DepotData';
-import DepotItem from './components/DepotItem';
+import DatePicker from 'react-native-datepicker';
+import DepotData from './helpers/DepotData';
+import ReleveData from './helpers/ReleveData';
+import RechargementData from './helpers/RechargementData';
+import TransfertData from './helpers/TransfertData';
 
 class MyAccountScreen extends Component {
   render() {
@@ -70,7 +73,54 @@ class ReleveScreen extends Component {
   render() {
     return (  
       <ScrollView style={styles.containerDefault}>
-          <View><Text></Text></View>
+          <View style={{}}>
+          <View style={{flexDirection:'row',marginTop:2,backgroundColor:'#7f8c8d',height:35}}>
+            <Text style={{color:'white',marginLeft:8,marginTop:6}}>Du</Text>
+            <Text style={{color:'white',marginLeft:95,marginTop:6}}>au</Text>
+            <Text style={{color:'white',marginLeft:110,marginTop:6}}>Type Transaction</Text>
+          </View>
+          <View style={{flexDirection:'row',marginTop:2,height:35}}>
+            <Text style={{color:'white',marginLeft:8,marginTop:6}}>21-01-2020</Text>
+            <Text style={{color:'white',marginLeft:30,marginTop:6}}>04-02-2020</Text>
+            <Text style={{color:'white',marginLeft:63,marginTop:6}}>Orange Money</Text>
+          </View>
+            <View style={{marginLeft:8}}>
+              <TouchableOpacity activeOpacity = { .5 } >
+                <Button title='Rechercher'   onPress={() => this.props.navigation.navigate('MyDepotSucess')} ViewComponent={LinearGradient} linearGradientProps={{colors:['#fff','#CF1111']}} buttonStyle={styles.buttons}/>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View>
+          <View style={{ marginTop:27}}>
+              <View style={{ flex:1,flexDirection: 'row',justifyContent: 'space-between', backgroundColor:'#ecf0f1'}}>
+                <Text style={{marginTop:8, color:'red',marginLeft:8}}>Transactions Récentes</Text>
+                <Button title="Tout Afficher" buttonStyle={styles.btnAll} ViewComponent={LinearGradient} linearGradientProps={{colors:['#fff','#CF1111']}}/>
+              </View>
+            </View>
+          <View style={{backgroundColor:'#7f8c8d',marginTop:2, height:35,flexDirection:'row'}}>
+              <Text style={{color:'white',marginTop:8,fontSize:14, marginLeft:6}}>Compte</Text>
+              <Text style={{color:'white',marginLeft:40,marginTop:8,fontSize:14}}>Libellé</Text>
+              <Text style={{color:'white',marginLeft:60,marginTop:8,fontSize:14}}>Montant</Text>
+              <Text style={{color:'white',marginLeft:58,marginTop:8,fontSize:14}}>Détail</Text>
+          </View>
+          {
+          dataReleve.map((l, i) => (
+            <ListItem onPress={()=>alert('OK')}
+              subtitleStyle={styles.titleListDepo}
+              titleStyle={styles.libelleDepot}
+              containerStyle={styles.bgListem}
+              rightTitleStyle={styles.priceDepot}
+              key={i}
+              leftAvatar={{ source: { uri: l.avatar_url } }}
+              title={l.name}
+              subtitle={l.subtitle}
+              rightTitle ={l.rightTitle}
+              bottomDivider
+              chevron
+            />
+          ))
+        }
+          </View>
       </ScrollView>
     );
   }
@@ -96,29 +146,29 @@ class DepotScreen extends Component {
                 <Button title="Tout Afficher" buttonStyle={styles.btnAll} ViewComponent={LinearGradient} linearGradientProps={{colors:['#fff','#CF1111']}}/>
               </View>
             </View>
-            {/* <FlatList
-            data={Depot}
-            keyExtractor={(item) => item.id.toString()}
-    renderItem = {({item}) =><DepotItem/>}
-            /> */}
-
             <View style={{backgroundColor:'#7f8c8d',marginTop:2, height:35,flexDirection:'row'}}>
               <Text style={{color:'white',marginTop:8,fontSize:14, marginLeft:6}}>Compte</Text>
               <Text style={{color:'white',marginLeft:40,marginTop:8,fontSize:14}}>Libellé</Text>
-              <Text style={{color:'white',marginLeft:87,marginTop:8,fontSize:14}}>Montant</Text>
-              <Text style={{color:'white',marginLeft:40,marginTop:8,fontSize:14}}>Détail</Text>
+              <Text style={{color:'white',marginLeft:60,marginTop:8,fontSize:14}}>Montant</Text>
+              <Text style={{color:'white',marginLeft:58,marginTop:8,fontSize:14}}>Détail</Text>
               </View>
-                      {
-              data.map((l, i) => (
-                <ListItem
-                  key={i}
-                  leftAvatar={{ source: { uri: l.avatar_url } }}
-                  title={l.name}
-                  subtitle={l.subtitle}
-                  bottomDivider
-                />
-              ))
-            }
+                  {
+          dataDepot.map((l, i) => (
+            <ListItem
+              subtitleStyle={styles.titleListDepo}
+              titleStyle={styles.libelleDepot}
+              containerStyle={styles.bgListem}
+              rightTitleStyle={styles.priceDepot}
+              key={i}
+              leftAvatar={{ source: { uri: l.avatar_url } }}
+              title={l.name}
+              subtitle={l.subtitle}
+              rightTitle ={l.rightTitle}
+              bottomDivider
+              chevron
+            />
+          ))
+        }
             </View>
       </ScrollView>
     );
@@ -146,6 +196,31 @@ class RechargementScreen extends Component {
               </View>
             </View>
             </View>
+            <View style={{backgroundColor:'#7f8c8d',marginTop:2, height:35,flexDirection:'row'}}>
+              <Text style={{color:'white',marginTop:8,fontSize:14, marginLeft:6}}>Compte</Text>
+              <Text style={{color:'white',marginLeft:40,marginTop:8,fontSize:14}}>Libellé</Text>
+              <Text style={{color:'white',marginLeft:60,marginTop:8,fontSize:14}}>Montant</Text>
+              <Text style={{color:'white',marginLeft:58,marginTop:8,fontSize:14}}>Détail</Text>
+          </View>
+            <View>
+            {
+          dataRechargement.map((l, i) => (
+            <ListItem
+              subtitleStyle={styles.titleListDepo}
+              titleStyle={styles.libelleDepot}
+              containerStyle={styles.bgListem}
+              rightTitleStyle={styles.priceDepot}
+              key={i}
+              leftAvatar={{ source: { uri: l.avatar_url } }}
+              title={l.name}
+              subtitle={l.subtitle}
+              rightTitle ={l.rightTitle}
+              bottomDivider
+              chevron
+            />
+          ))
+        }
+            </View>
       </ScrollView>
     );
   }
@@ -157,28 +232,54 @@ class TransfertScreen extends Component {
     return (  
       <ScrollView style={styles.containerDefault}>
           <View>
-            {/* <Text style={styles.idcard}>Montant à transférer</Text> */}
-            <View style={{flexDirection:'row',marginTop:10}}>
-              <Text style={{color:'white', marginLeft:15,marginBottom:4}}>Montant à transférer</Text>
-              <Text style={{color:'white', marginLeft:67}}>Destinataire</Text>
-            </View>
             <View style={{flexDirection:'row'}}> 
-              <TextInput style={{borderRadius:27, width:170, marginLeft:8,backgroundColor:'white'}} placeholder="Entrez le montant"/>
-              <TextInput style={{borderRadius:27, width:170, marginLeft:8,backgroundColor:'white'}} placeholder="DPY-XXX XXX XXX"/>
+              <Text style={{color:'white', marginLeft:8,marginTop:8}}>Montant à transférer</Text>
+              <Text style={{color:'white', marginLeft:95,marginTop:8}}>DPY Bénéficiare</Text>
             </View>
-              
-            {/* </View> */}
+            <View style={{flexDirection:'row'}}>
+              <View style={styles.inputransfertmontant}>
+                <TextInput placeholder="Entrez le montant" style={{marginLeft:8}}/>
+              </View>
+              <View style={styles.inputransfertdesti}>
+                <TextInput placeholder="DPY-XXX XXX XXX" style={{marginLeft:8}}/>
+              </View>
+            </View>
             <View style={{marginLeft:8,marginTop:4}}>
               <TouchableOpacity activeOpacity = { .5 } >
                 <Button title='Transférer'   onPress={() => this.props.navigation.navigate('MyDepotSucess')} ViewComponent={LinearGradient} linearGradientProps={{colors:['#fff','#CF1111']}} buttonStyle={styles.buttons}/>
               </TouchableOpacity>
             </View>
-            <View style={{ marginTop:35}}>
+            <View style={{ marginTop:18}}>
               <View style={{ flex:1,flexDirection: 'row',justifyContent: 'space-between', backgroundColor:'#ecf0f1'}}>
                 <Text style={{marginTop:8, color:'red',marginLeft:8}}>Transferts Récents</Text>
                 <Button title="Tout Afficher" buttonStyle={styles.btnAll} ViewComponent={LinearGradient} linearGradientProps={{colors:['#fff','#CF1111']}}/>
               </View>
             </View>
+            </View>
+            <View style={{backgroundColor:'#7f8c8d',marginTop:2, height:35,flexDirection:'row'}}>
+              <Text style={{color:'white',marginTop:8,fontSize:14, marginLeft:6}}>Compte</Text>
+              <Text style={{color:'white',marginLeft:40,marginTop:8,fontSize:14}}>Libellé</Text>
+              <Text style={{color:'white',marginLeft:60,marginTop:8,fontSize:14}}>Montant</Text>
+              <Text style={{color:'white',marginLeft:58,marginTop:8,fontSize:14}}>Détail</Text>
+          </View>
+            <View>
+            {
+          dataTransfert.map((l, i) => (
+            <ListItem
+              subtitleStyle={styles.titleListDepo}
+              titleStyle={styles.libelleDepot}
+              containerStyle={styles.bgListem}
+              rightTitleStyle={styles.priceDepot}
+              key={i}
+              leftAvatar={{ source: { uri: l.avatar_url } }}
+              title={l.name}
+              subtitle={l.subtitle}
+              rightTitle ={l.rightTitle}
+              bottomDivider
+              chevron
+            />
+          ))
+        }
             </View>
       </ScrollView>
     );
@@ -189,10 +290,7 @@ class BonusScreen extends Component {
   render() {
     return (  
       <ScrollView style={styles.containerDefault}>
-          {/* <View style={styles.logoPay}>
-            <Text h4 style={{color:'white'}}>Discount</Text>
-            <Text h4 style={{color:'#FCDD00'}}>Pay</Text>
-          </View> */}
+         
           <View><Text></Text></View>
       </ScrollView>
     );
@@ -203,10 +301,6 @@ class DcardScreen extends Component {
   render() {
     return (  
       <ScrollView style={styles.containerDefault}>
-          {/* <View style={styles.logoPay}>
-            <Text h4 style={{color:'white'}}>Discount</Text>
-            <Text h4 style={{color:'#FCDD00'}}>Pay</Text>
-          </View> */}
           <View>
             <Text style={styles.idcard}>Numéro de la carte</Text>
             <View style={styles.inputcard}>
@@ -245,10 +339,6 @@ class DcardViewScreen extends Component {
   render() {
     return (  
       <ScrollView style={styles.containerDefault}>
-          {/* <View style={styles.logoPay}>
-            <Text h4 style={{color:'white'}}>Discount</Text>
-            <Text h4 style={{color:'#FCDD00'}}>Pay</Text>
-          </View> */}
           <View >
             <Text style={{color:'white',marginTop:8,marginLeft:8}}>Coordonnées</Text>
           </View>
@@ -360,7 +450,6 @@ var styles = StyleSheet.create({
   },
   btnLogin:{
     width:150,
-    // marginLeft:8,
     marginLeft:100
   },
   buttons:{
@@ -392,6 +481,20 @@ var styles = StyleSheet.create({
     marginTop:8,
     width:300,
     marginLeft:8
+  },
+  inputransfertmontant:{
+    backgroundColor:'white',
+    borderRadius:27,
+    marginLeft:8,
+    width:185,
+    marginTop:8,
+  },
+  inputransfertdesti:{
+    backgroundColor:'white',
+    borderRadius:27,
+    marginLeft:12,
+    width:145,
+    marginTop:8,
   },
   inputcardwithdata:{
     backgroundColor:'white',
@@ -428,7 +531,23 @@ var styles = StyleSheet.create({
     borderRadius:27,
     width:150,
     marginRight:-19
-  }
+  },
+  titleListDepo:{
+    color:'red',
+    fontSize:10
+  },
+  libelleDepot:{
+    fontSize:12,
+  },
+  
+  priceDepot:{
+    color:'red',
+    fontSize:12,
+    position:'absolute',
+    width:150,
+    textAlign:'center'
+  },
+  
 });
 
 
