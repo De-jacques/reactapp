@@ -52,7 +52,7 @@ class MyAccountScreen extends Component {
             <Image   source={require('../assets/icons/transfert_dpay.png')} style={{width:75,height:75,marginEnd:15,marginStart:20}}  resizeMode='contain'/>
           </TouchableOpacity>
           <TouchableOpacity activeOpacity = { .5 } onPress={() => this.props.navigation.navigate('MyBonusHome')}>
-            <Image   source={require('../assets/icons/recompense_dpay.png')} style={{width:75,height:75,marginEnd:15,marginStart:20}}  resizeMode='contain'/>
+            <Image   source={require('../assets/icons/map_dpay.png')} style={{width:75,height:75,marginEnd:15,marginStart:20}}  resizeMode='contain'/>
           </TouchableOpacity>
           <TouchableOpacity activeOpacity = { .5 } onPress={() => this.props.navigation.navigate('MyDcardHome')}>
             <Image   source={require('../assets/icons/card_dpay.png')} style={{width:75,height:75,marginEnd:15,marginStart:20}}  resizeMode='contain'/>
@@ -61,7 +61,7 @@ class MyAccountScreen extends Component {
 
           <View style={{flexDirection:'row', justifyContent:'center', margin:5, padding:5,}}>
             <Text style={{color:'white', fontSize:18,marginEnd:26,marginStart:23}}>Transfert</Text>
-            <Text style={{color:'white', fontSize:18,marginEnd:26,marginStart:23}}>Bonus</Text>
+            <Text style={{color:'white', fontSize:18,marginEnd:26,marginStart:23}}>Localiser</Text>
             <Text style={{color:'white', fontSize:18,marginEnd:26,marginStart:23}}>Dcard</Text>
           </View>
       </ScrollView>
